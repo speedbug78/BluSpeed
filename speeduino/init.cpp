@@ -2751,6 +2751,59 @@ void setPinMapping(byte boardID)
         #endif
       #endif  
       break;
+
+
+
+    case 78:
+      //Pin mappings for BlueSpeed: https://github.com/speedbug78/BluSpeed
+      #if (defined(STM32F411xE) || defined(STM32F401xC))
+        //pins PA12, PA11 are used for USB or CAN couldn't be used for GPIO
+        //pins PA4, PA5, PA6 and PA7 are used for on-board external SPI FLASH
+        //PB2 can't be used as input because it's the BOOT pin
+        pinInjector1 = PB4; //Output pin injector 1 is on
+        pinCoil1 = PB6; //Pin for coil 1
+        pinCoil2 = PB7; //Pin for coil 2
+        pinTrigger = PB3; //The CAS pin
+        pinTPS = PB0;//TPS input pin
+        pinMAP = PA3; //MAP sensor pin
+        pinBaro = pinMAP;
+        pinIAT = PA2; //IAT sensor pin
+        pinCLT = PA1; //CLS sensor pin
+        pinO2 = PB1; //O2 Sensor pin
+        pinBat = PA0; //Battery reference voltage pin
+        pinFuelPump = PA15; //Fuel pump output
+        pinFan = PB8; //Pin for the fan output
+        pinBoost = PB5; //Boost control
+        pinStepperDir = PC13; //Direction pin  for DRV8825 driver
+        pinStepperStep = PC15; //Step pin for DRV8825 driver
+        pinStepperEnable = PC14; //Enable pin for DRV8825
+        pinLaunch = PB12; //Can be overwritten below
+        pinVSS = PB9;
+
+      #elif defined(CORE_STM32) // Blue pill
+        //pins PA12, PA11 are used for USB or CAN couldn't be used for GPIO
+        //PB2 can't be used as input because it's the BOOT pin
+        pinInjector1 = PB4; //Output pin injector 1 is on
+        pinCoil1 = PB6; //Pin for coil 1
+        pinCoil2 = PB7; //Pin for coil 2
+        pinTrigger = PB3; //The CAS pin
+        pinTPS = PB0;//TPS input pin
+        pinMAP = PA3; //MAP sensor pin
+        pinBaro = pinMAP;
+        pinIAT = PA2; //IAT sensor pin
+        pinCLT = PA1; //CLS sensor pin
+        pinO2 = PB1; //O2 Sensor pin
+        pinBat = PA0; //Battery reference voltage pin
+        pinFuelPump = PA15; //Fuel pump output
+        pinFan = PB8; //Pin for the fan output
+        pinBoost = PB5; //Boost control
+        pinStepperDir = PC13; //Direction pin  for DRV8825 driver
+        pinStepperStep = PC15; //Step pin for DRV8825 driver
+        pinStepperEnable = PC14; //Enable pin for DRV8825
+        pinLaunch = PB12; //Can be overwritten below
+        pinVSS = PB9;
+      #endif
+      break;
   }
 
   //Setup any devices that are using selectable pins
