@@ -2774,34 +2774,53 @@ void setPinMapping(byte boardID)
         pinFuelPump = PA15; //Fuel pump output
         pinFan = PB8; //Pin for the fan output
         pinBoost = PB5; //Boost control
-        pinStepperDir = PC13; //Direction pin  for DRV8825 driver
-        pinStepperStep = PC15; //Step pin for DRV8825 driver
-        pinStepperEnable = PC14; //Enable pin for DRV8825
-        pinLaunch = PB12; //Can be overwritten below
-        pinVSS = PB9;
-
-      #elif defined(CORE_STM32) // Blue pill
+        pinIdle1 = PB9; //PWM IAC (better than stepper? https://www.msextra.com/forums/viewtopic.php?t=55625)
+        pinLaunch = PB12; //Clutch input      
+      #elif (defined(STM32H723xG))
         //pins PA12, PA11 are used for USB or CAN couldn't be used for GPIO
-        //PB2 can't be used as input because it's the BOOT pin
-        pinInjector1 = PB4; //Output pin injector 1 is on
-        pinCoil1 = PB6; //Pin for coil 1
-        pinCoil2 = PB7; //Pin for coil 2
-        pinTrigger = PB3; //The CAS pin
-        pinTPS = PB0;//TPS input pin
-        pinMAP = PA3; //MAP sensor pin
-        pinBaro = pinMAP;
-        pinIAT = PA2; //IAT sensor pin
-        pinCLT = PA1; //CLS sensor pin
-        pinO2 = PB1; //O2 Sensor pin
-        pinBat = PA0; //Battery reference voltage pin
-        pinFuelPump = PA15; //Fuel pump output
-        pinFan = PB8; //Pin for the fan output
-        pinBoost = PB5; //Boost control
-        pinStepperDir = PC13; //Direction pin  for DRV8825 driver
-        pinStepperStep = PC15; //Step pin for DRV8825 driver
-        pinStepperEnable = PC14; //Enable pin for DRV8825
-        pinLaunch = PB12; //Can be overwritten below
-        pinVSS = PB9;
+        //PB2 can't be used as input because is BOOT pin
+        pinInjector1 = 4; //Output pin injector 1 is on
+        pinInjector2 = 5; //Output pin injector 2 is on
+        pinInjector3 = 6; //Output pin injector 3 is on
+        pinInjector4 = 7; //Output pin injector 4 is on
+        pinInjector5 = 8; //Placeholder only - NOT USED
+        pinInjector6 = 9; //Placeholder only - NOT USED
+        pinInjector7 = 10; //Placeholder only - NOT USED
+        pinInjector8 = 11; //Placeholder only - NOT USED
+        pinCoil1 = 24; //Pin for coil 1
+        pinCoil2 = 28; //Pin for coil 2
+        pinCoil3 = 36; //Pin for coil 3
+        pinCoil4 = 40; //Pin for coil 4
+        pinCoil5 = PB9; //Pin for coil 5
+        pinCoil6 = PB8; //Pin for coil 6
+        pinCoil7 = PB3; //Pin for coil 7
+        pinCoil8 = PA15; //Pin for coil 8
+        pinTPS = A2;//Throttle position sensor input pin
+        pinMAP = A3; //Manifold air pressure sensor pin
+        pinMAP2 = A8; //MAP2 sensor pin
+        pinBaro = pinMAP; //Barometric pressure sensor pin
+        pinIAT = A0; //Intake air temperature sensor pin
+        pinCLT = A1; //Coolant temperature sensor sensor pin
+        pinO2 = A4; //Oxygen sensor pin
+        pinBat = A7; //Battery input voltage pin
+        pinDisplayReset = 48; // OLED reset pin
+        pinSpareTemp1 = A6;
+        pinSpareTemp2 = A5;
+        pinTachOut = 41; //Tachometer output pin
+        pinFuelPump = 42; //Fuel pump output pin
+        pinFan = 47; //Radiator fan output pin
+        pinResetControl = 26; //Reset control output
+        pinBoost = PA6; //Boost control pin
+        pinLaunch = PB12; //Clutch input pin
+        pinStepperDir = PB10; //Direction pin  for DRV8825 driver
+        pinStepperStep = PB2; //Step pin for DRV8825 driver
+        pinIdle1 = PB2; //Single wire idle control
+        pinIdle2 = PB10; //2 wire idle control
+
+        //external interrupt enabled pins
+        pinFlex = PC14; // Flex fuel sensor pin(Must be external interrupt enabled)
+        pinTrigger = PC13; //The Crankshaft angle sensor pin
+        pinTrigger2 = PC15; //The Camshaft position sensor pin
       #endif
       break;
   }
